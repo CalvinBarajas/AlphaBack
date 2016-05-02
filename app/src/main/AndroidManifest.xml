@@ -17,7 +17,10 @@
         </activity>
 
         <activity android:name=".GameOne"
-            android:windowSoftInputMode="stateAlwaysVisible" />
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:screenOrientation="portrait"
+
+            />
 
     </application>
 
