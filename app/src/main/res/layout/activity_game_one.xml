@@ -4,19 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="30dp"
+    android:padding="20dp"
+    android:background="#CDDC39"
     tools:context=".GuessingGame">
+
+
+    <Button
+        android:id="@+id/end_game_button"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="End Game"
+
+        />
+
+
+
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#FFB74D"
+        >
+
 
         <TextView
             android:id="@+id/alphabet_letter_header"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="Alphabet Letter" />
+            android:text="The Letter" />
 
         <TextView
             android:id="@+id/alphabet_letter_body"
@@ -25,7 +43,7 @@
             android:layout_below="@id/alphabet_letter_header"
             android:gravity="center_horizontal"
             android:text="_"
-            android:textSize="100sp" />
+            android:textSize="75sp" />
 
         <TextView
             android:id="@+id/guess_header"
@@ -43,17 +61,11 @@
             android:layout_below="@id/guess_header"
             android:gravity="center_horizontal"
             android:text="_"
-            android:textSize="100sp" />
+            android:textSize="75sp" />
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/end_game_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="End Game"
 
-        />
 
 
 
