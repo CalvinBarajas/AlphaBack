@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">AlphaBack</string>
+    <string name="app_name">Alphabet Backwards Game</string>
+    <string name="guessing_game">Guessing Game</string>
+    <string name="flash_cards">Flash Cards Game</string>
+
 </resources>

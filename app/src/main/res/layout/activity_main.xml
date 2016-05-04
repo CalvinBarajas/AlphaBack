@@ -7,15 +7,23 @@
     android:padding="20dp"
     tools:context="org.samanthaai.alphaback.MainActivity">
 
-
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Start Game"
+        android:text="Guessing Game"
 
         />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_margin="20dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Flash Cards"
+
+        />
 
 
 </LinearLayout>

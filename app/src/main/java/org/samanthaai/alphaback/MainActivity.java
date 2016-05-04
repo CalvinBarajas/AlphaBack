@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View view) {
 
-                Intent intent = new Intent(MainActivity.this, GameOne.class);
+                Intent intent = new Intent(MainActivity.this, GuessingGame.class);
                 startActivity(intent);
             }
 

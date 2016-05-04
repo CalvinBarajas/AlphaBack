@@ -15,12 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".GameOne"
-            android:windowSoftInputMode="stateAlwaysVisible"
+        <activity
+            android:name=".GuessingGame"
+            android:label="@string/guessing_game"
             android:screenOrientation="portrait"
-
-            />
+            android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity
+            android:name=".FlashCards"
+            android:label="@string/flash_cards" />
 
     </application>
 
