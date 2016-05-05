@@ -11,15 +11,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class GuessingGame extends AppCompatActivity {
 
     public static int guessIndex;  // displayed on right side of screen - users guess
     public static int randomNum; // index of random letter generated
+    private static TextView guess;  // global TextView to manipulate color
+    private static TextView alphabetLetter;  // not sure if this is needed globally
+    private static boolean correctAnswer = false;
+    private static String[] englishAlphabet = {"a", "b", "c", "d", "e", "f", "g"}; // this is the entire english alphabet
 
-    // this is the entire english alphabet
-    private static String[] englishAlphabet = {"a", "b", "c", "d"};
 
-    private static TextView guess;
+    private static ArrayList<Integer> alreadyDisplayed;
 
 
 
@@ -27,6 +31,22 @@ public class GuessingGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_one);
+
+        // create array that will keep track of random letters already displayed (so no dupes are shown)
+        alreadyDisplayed = new ArrayList<Integer>();
+
+
+        alreadyDisplayed.add(3);
+        alreadyDisplayed.add(5);
+        alreadyDisplayed.add(1);
+
+
+        Log.e("alreadyDisplayed --> ", alreadyDisplayed.contains(2) + "");
+
+
+
+
+
 
         // find the view (used for ending the game)
         Button endGame = (Button) findViewById(R.id.end_game_button);
@@ -38,32 +58,17 @@ public class GuessingGame extends AppCompatActivity {
             }
         });
 
-        // generate a random number to display random alphabet letter that user will guess against
-        // range needs to exclude letter 'a' (zero index)
-        int minimum = 1;  // inclusive
-        int maximum = englishAlphabet.length;  // inclusive (4)
-        randomNum = minimum + (int)(Math.random() * maximum);
+        // generate a random number to display the initial random alphabet letter that user will guess against
+        randomNum = generateRandomNumber();
 
         // find view of alphabet letter
-        TextView alphabetLetter = (TextView) findViewById(R.id.alphabet_letter_body);
+        alphabetLetter = (TextView) findViewById(R.id.alphabet_letter_body);
 
         // display random alphabet letter on left-side of the screen
         alphabetLetter.setText(englishAlphabet[randomNum]);
 
-
-
         // find view for body text two
         guess = (TextView) findViewById(R.id.guess_body);
-
-
-
-
-
-
-
-
-
-
 
 
     }
@@ -76,31 +81,44 @@ public class GuessingGame extends AppCompatActivity {
         switch (keyCode) {
             case KeyEvent.KEYCODE_A:
                 guessIndex = 0;
-                Log.e("guessIndex 000", guessIndex + "");
-                Log.e("randomNum 000", randomNum + "");
                 compareLetters(randomNum, guessIndex);
                 guess.setText("a");
                 return true;
             case KeyEvent.KEYCODE_B:
                 guessIndex = 1;
-                Log.e("guessIndex 001", guessIndex + "");
-                Log.e("randomNum 001", randomNum + "");
                 compareLetters(randomNum, guessIndex);
                 guess.setText("b");
                 return true;
             case KeyEvent.KEYCODE_C:
                 guessIndex = 2;
-                Log.e("guessIndex 002", guessIndex + "");
-                Log.e("randomNum 002", randomNum + "");
                 compareLetters(randomNum, guessIndex);
                 guess.setText("c");
+                return true;
+            case KeyEvent.KEYCODE_D:
+                guessIndex = 3;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("d");
+                return true;
+            case KeyEvent.KEYCODE_E:
+                guessIndex = 4;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("e");
+                return true;
+            case KeyEvent.KEYCODE_F:
+                guessIndex = 5;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("f");
+                return true;
+            case KeyEvent.KEYCODE_G:
+                guessIndex = 6;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("g");
                 return true;
             default:
                 guess.setText("?");
                 // display toast in case user types in something other than a letter
                 Toast toast = Toast.makeText(getApplicationContext(), "Lower-Case Letters Only", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-
                 toast.show();
                 return false;
         }
@@ -108,19 +126,30 @@ public class GuessingGame extends AppCompatActivity {
     }
 
 
-
     public boolean compareLetters(int randomNum, int guessIndex) {
 
-        if(guessIndex == (randomNum - 1)) {
+        if (guessIndex == (randomNum - 1)) {
 
-            guess.setTextColor(Color.parseColor("#009688"));
+            correctAnswer = true;
+            guess.setTextColor(Color.parseColor("#0000FF"));
             Toast toast = Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
+
+            // generate a random number to display random alphabet letter that user will guess against
+            randomNum = generateRandomNumber();
+
+            // display random alphabet letter on left-side of the screen
+            alphabetLetter.setText(englishAlphabet[randomNum]);
+
+
+
+
             return true;
 
         } else {
 
+            correctAnswer = false;
             Toast toast = Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
@@ -132,6 +161,16 @@ public class GuessingGame extends AppCompatActivity {
     }
 
 
+    public int generateRandomNumber() {
+
+        // generate a random number to display random alphabet letter that user will guess against
+        // range needs to exclude letter 'a' (zero index) because nothing precedes 'a'
+        int minimum = 1;  // inclusive
+        int maximum = englishAlphabet.length - 1;  // inclusive
+        randomNum = minimum + (int) (Math.random() * maximum);
+
+        return randomNum;
+    }
 
 
 

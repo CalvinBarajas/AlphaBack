@@ -3,70 +3,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CDDC39"
     android:orientation="vertical"
     android:padding="20dp"
-    android:background="#CDDC39"
     tools:context=".GuessingGame">
-
 
     <Button
         android:id="@+id/end_game_button"
-        android:layout_width="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:textColor="#000"
+        android:background="@drawable/button"
+        android:layout_marginBottom="10dp"
         android:text="End Game"
-
         />
-
-
-
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FFB74D"
-        >
-
+        android:background="#FF9800">
 
         <TextView
             android:id="@+id/alphabet_letter_header"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="The Letter" />
+            android:text="The Letter"
+            android:textSize="20sp"
+            />
 
         <TextView
             android:id="@+id/alphabet_letter_body"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/alphabet_letter_header"
             android:gravity="center_horizontal"
             android:text="_"
-            android:textSize="75sp" />
+            android:textColor="#0000FF"
+            android:textSize="125sp"
+            android:fontFamily="sans-serif-condensed"
+
+            />
 
         <TextView
             android:id="@+id/guess_header"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:gravity="center_horizontal"
-            android:text="Your Guess" />
+            android:text="Your Guess"
+            android:textSize="20sp"
+
+            />
 
         <TextView
             android:id="@+id/guess_body"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/guess_header"
             android:gravity="center_horizontal"
             android:text="_"
-            android:textSize="75sp" />
+            android:textColor="#0000FF"
+            android:textSize="125sp"
+            android:fontFamily="sans-serif-condensed"
+
+
+            />
 
     </RelativeLayout>
-
-
-
 
 
 </LinearLayout>
