@@ -1,6 +1,7 @@
 package org.samanthaai.alphaback;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -131,15 +132,14 @@ public class GuessingGame extends AppCompatActivity {
 
         if (guessIndex == (randomNum - 1)) {
 
+            // if guess is right, send an auditory notification as well as a visual one
+            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.right);
+            mp.start();
+
             // add successfully guessed letter to array
             alreadyDisplayed.add(randomNum);
 
             guess.setTextColor(Color.parseColor("#0000FF"));
-
-            // toast message when user is "correct"
-            Toast toast = Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            toast.show();
 
             // generate a random number to display random alphabet letter that user will guess against
             randomNum = generateRandomNumber();
@@ -149,6 +149,10 @@ public class GuessingGame extends AppCompatActivity {
 
 
         } else {
+
+            // if guess is wrong, send an auditory notification as well as a visual one
+            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.wrong);
+            mp.start();
 
             // toast message when a non-alpha LC is used
             Toast toast = Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT);
@@ -178,6 +182,13 @@ public class GuessingGame extends AppCompatActivity {
 
             if(alreadyDisplayed.size() >= englishAlphabet.length - 1){
                 Log.e("GAME OVER --->", "COMPLETED...");
+
+                // if guess is right, send an auditory notification as well as a visual one
+                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.gameover);
+                mp.start();
+
+
+
 
                 Toast toast = Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
