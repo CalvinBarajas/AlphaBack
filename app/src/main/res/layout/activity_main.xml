@@ -7,22 +7,41 @@
     android:padding="20dp"
     tools:context="org.samanthaai.alphaback.MainActivity">
 
+    <ImageView
+        android:src="@drawable/home_banner"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        />
+
+
     <Button
         android:id="@+id/button1"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
         android:layout_margin="20dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
         android:text="Guessing Game"
-
+        android:textSize="20sp"
+        android:layout_gravity="center"
         />
 
     <Button
         android:id="@+id/button2"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
         android:layout_margin="20dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
         android:text="Flash Cards"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        />
 
+    <Button
+        android:id="@+id/end_game_button"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_margin="20dp"
+        android:text="Quit"
+        android:textSize="20sp"
+        android:layout_gravity="center"
         />
 
 

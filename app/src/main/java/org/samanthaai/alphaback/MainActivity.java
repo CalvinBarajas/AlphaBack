@@ -13,6 +13,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // find the view (used for ending the game)
+        Button endGame = (Button) findViewById(R.id.end_game_button);
+
+        // assign listener to button (used for ending the game)
+        endGame.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
         // find the view
         Button startGame = (Button) findViewById(R.id.button1);
 

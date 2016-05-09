@@ -18,14 +18,16 @@ import java.util.Set;
 
 public class GuessingGame extends AppCompatActivity {
 
-    public static int guessIndex;  // displayed on right side of screen - users guess
-    public static int randomNum = 0; // index of random letter generated
+    private static int guessIndex;  // displayed on right side of screen - users guess
+    private static int randomNum = 0; // index of random letter generated
     private static TextView guess;  // global TextView to manipulate color
     private static TextView alphabetLetter;  // not sure if this is needed globally
     private static String[] englishAlphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}; // this is the entire english alphabet
     private static Set<Integer> alreadyDisplayed; // keep track of letters already displayed to end-user
     private static long startTime; // keep time of game duration
     private static long stopTime; // keep time of game duration
+    private static long elapsedTime; // make this available to the FinalScore class
+    private static int penalty; // keep track of mistakes
 
 
 
@@ -34,9 +36,13 @@ public class GuessingGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_one);
 
+        // initialize penalty to zero
+        penalty = 0;
+
+        Log.e("001 penalty --->", penalty + "");
 
         startTime = System.currentTimeMillis();
-        Log.e("startTime 001 --->", startTime + "");
+        Log.e("currentTimeMillis0 --->", System.currentTimeMillis() + "");
 
 
 
@@ -71,7 +77,7 @@ public class GuessingGame extends AppCompatActivity {
         // find view for body text two
         guess = (TextView) findViewById(R.id.guess_body);
 
-        Log.e("startTime 002 --->", startTime + "");
+        Log.e("currentTimeMillis1 --->", System.currentTimeMillis() + "");
 
     }
 
@@ -82,7 +88,8 @@ public class GuessingGame extends AppCompatActivity {
             case KeyEvent.KEYCODE_A:
                 guessIndex = 0;
 
-                Log.e("startTime 003 --->", startTime + "");
+                Log.e("currentTimeMillis2 --->", System.currentTimeMillis() + "");
+
 
                 compareLetters(randomNum, guessIndex);
                 guess.setText("a");
@@ -167,7 +174,7 @@ public class GuessingGame extends AppCompatActivity {
             // find progress bar view (graphical representation)
             TextView progressBar = (TextView) findViewById(R.id.progress_bar);
 
-            // display progress bar in blocks
+            // append another "block" to the progress bar
             progressBar.append("█");
 
             // find progress bar view (numerical representation)
@@ -177,12 +184,13 @@ public class GuessingGame extends AppCompatActivity {
             progressBarCount.setText(alreadyDisplayed.size() + "/26");
 
 
-            Log.e("startTime 004 --->", startTime + "");
-
+            Log.e("currentTimeMillis3 --->", System.currentTimeMillis() + "");
 
 
 
         } else {
+
+            penalty += 1;
 
             // if guess is wrong, send an auditory notification as well as a visual one
             MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.wrong);
@@ -195,7 +203,7 @@ public class GuessingGame extends AppCompatActivity {
             guess.setTextColor(Color.parseColor("#FF0000"));
 
 
-            Log.e("startTime 005 --->", startTime + "");
+            Log.e("currentTimeMillis4 --->", System.currentTimeMillis() + "");
 
         }
 
@@ -213,7 +221,8 @@ public class GuessingGame extends AppCompatActivity {
 
         while(true) {
 
-            Log.e("startTime 006 --->", startTime + "");
+            Log.e("currentTimeMillis5 --->", System.currentTimeMillis() + "");
+
 
 
             n++;
@@ -262,12 +271,16 @@ public class GuessingGame extends AppCompatActivity {
 
     public void gameOver() {
 
-        Log.e("startTime 007 --->", startTime + "");
+        Log.e("currentTimeMillis6 --->", System.currentTimeMillis() + "");
+
 
         // keep track of how long game took to complete
         stopTime = System.currentTimeMillis();
-        long elapsedTime = stopTime - startTime;
-        Log.e("elapsedTime --->", elapsedTime + "");
+        elapsedTime = stopTime - startTime;
+        Log.e("elapsedTime 00001 --->", elapsedTime + "");
+
+
+
 
 
 
@@ -289,13 +302,14 @@ public class GuessingGame extends AppCompatActivity {
     }
 
 
+    // Getter (from setters and getters concept)
+    public static long getElapsedTime() {
+        return elapsedTime;
+    }
 
-
-
-
-
-
-
+    public static int getPenalty() {
+        return penalty;
+    }
 
 
 
