@@ -23,7 +23,7 @@
         <activity
             android:name=".FlashCards"
             android:label="@string/flash_cards" />
-
+        <activity android:name=".FinalScore"></activity>
     </application>
 
 </manifest>

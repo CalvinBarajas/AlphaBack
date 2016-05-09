@@ -1,5 +1,6 @@
 package org.samanthaai.alphaback;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -23,11 +24,22 @@ public class GuessingGame extends AppCompatActivity {
     private static TextView alphabetLetter;  // not sure if this is needed globally
     private static String[] englishAlphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}; // this is the entire english alphabet
     private static Set<Integer> alreadyDisplayed; // keep track of letters already displayed to end-user
+    private static long startTime; // keep time of game duration
+    private static long stopTime; // keep time of game duration
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_one);
+
+
+        startTime = System.currentTimeMillis();
+        Log.e("startTime 001 --->", startTime + "");
+
+
+
 
         // create array that will keep track of random letters already displayed (so no dupes are shown)
         alreadyDisplayed = new HashSet<Integer>();
@@ -59,6 +71,8 @@ public class GuessingGame extends AppCompatActivity {
         // find view for body text two
         guess = (TextView) findViewById(R.id.guess_body);
 
+        Log.e("startTime 002 --->", startTime + "");
+
     }
 
     @Override
@@ -67,6 +81,9 @@ public class GuessingGame extends AppCompatActivity {
         switch (keyCode) {
             case KeyEvent.KEYCODE_A:
                 guessIndex = 0;
+
+                Log.e("startTime 003 --->", startTime + "");
+
                 compareLetters(randomNum, guessIndex);
                 guess.setText("a");
                 return true;
@@ -147,6 +164,23 @@ public class GuessingGame extends AppCompatActivity {
             // display random alphabet letter on left-side of the screen
             alphabetLetter.setText(englishAlphabet[randomNum]);
 
+            // find progress bar view (graphical representation)
+            TextView progressBar = (TextView) findViewById(R.id.progress_bar);
+
+            // display progress bar in blocks
+            progressBar.append("█");
+
+            // find progress bar view (numerical representation)
+            TextView progressBarCount = (TextView) findViewById(R.id.progress_bar_count);
+
+            // display progress bar in blocks
+            progressBarCount.setText(alreadyDisplayed.size() + "/26");
+
+
+            Log.e("startTime 004 --->", startTime + "");
+
+
+
 
         } else {
 
@@ -160,6 +194,8 @@ public class GuessingGame extends AppCompatActivity {
             toast.show();
             guess.setTextColor(Color.parseColor("#FF0000"));
 
+
+            Log.e("startTime 005 --->", startTime + "");
 
         }
 
@@ -177,23 +213,15 @@ public class GuessingGame extends AppCompatActivity {
 
         while(true) {
 
+            Log.e("startTime 006 --->", startTime + "");
+
+
             n++;
             Log.e("value of n --->", n + "");
 
             if(alreadyDisplayed.size() >= englishAlphabet.length - 1){
-                Log.e("GAME OVER --->", "COMPLETED...");
 
-                // if guess is right, send an auditory notification as well as a visual one
-                MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.gameover);
-                mp.start();
-
-
-
-
-                Toast toast = Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
-
+                gameOver();
 
                 break;
             }
@@ -232,8 +260,33 @@ public class GuessingGame extends AppCompatActivity {
     }
 
 
+    public void gameOver() {
+
+        Log.e("startTime 007 --->", startTime + "");
+
+        // keep track of how long game took to complete
+        stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        Log.e("elapsedTime --->", elapsedTime + "");
 
 
+
+        Log.e("GAME OVER --->", "COMPLETED...");
+
+        // if guess is right, send an auditory confirmation that game is over
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.gameover);
+        mp.start();
+
+        Toast toast = Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.show();
+
+
+        Intent intent = new Intent(this, FinalScore.class);
+        startActivity(intent);
+
+
+    }
 
 
 
