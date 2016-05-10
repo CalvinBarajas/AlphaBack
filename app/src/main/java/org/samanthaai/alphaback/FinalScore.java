@@ -1,5 +1,6 @@
 package org.samanthaai.alphaback;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,12 @@ public class FinalScore extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_score);
 
+
+        // if guess is right, send an auditory confirmation that game is over
+        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.gameover);
+        mp.setVolume(1.0f, 1.0f);
+        mp.start();
+        //mp.release();
 
 
         // find the view (used for ending the game)
@@ -42,16 +49,14 @@ public class FinalScore extends AppCompatActivity {
         TextView wrongAnswers = (TextView) findViewById(R.id.wrong_answers);
 
         // set text for wrong answers
-        wrongAnswers.setText(GuessingGame.getPenalty() + " wrg x 2 pts = " + GuessingGame.getPenalty() * 2);
+        wrongAnswers.setText(GuessingGame.getPenalty() + " x 2 pts = " + GuessingGame.getPenalty() * 2);
 
 
         // find the view for final score
         TextView finalScore = (TextView) findViewById(R.id.final_score);
 
         // set text for wrong answers
-
         Log.e("GuessingGame.getPenalty() --->", GuessingGame.getPenalty() + "");
-
         if((26 - (GuessingGame.getPenalty() * 2)) <= 0) {
             finalScore.setText("0/26 pts");
         } else {

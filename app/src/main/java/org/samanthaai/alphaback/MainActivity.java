@@ -1,10 +1,12 @@
 package org.samanthaai.alphaback;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+
+        // find the view
+        TextView textView = (TextView) findViewById(R.id.hello_world);
+        Typeface myCustomFont1 = Typeface.createFromAsset(getAssets(), "fonts/school.ttf");
+        textView.setTypeface(myCustomFont1);
+
+
+
 
 
     }

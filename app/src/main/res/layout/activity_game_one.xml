@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CDDC39"
+    android:background="#FF9800"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".GuessingGame">
@@ -22,7 +22,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FF9800">
+        android:background="@drawable/rounded_bg" >
 
         <TextView
             android:id="@+id/alphabet_letter_header"
@@ -37,11 +37,10 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/alphabet_letter_header"
-            android:fontFamily="sans-serif-condensed"
             android:gravity="center_horizontal"
-            android:text="_"
+            android:text="."
             android:textColor="#0000FF"
-            android:textSize="75sp"
+            android:textSize="85sp"
 
             />
 
@@ -62,12 +61,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/guess_header"
-            android:fontFamily="sans-serif-condensed"
             android:gravity="center_horizontal"
-            android:text="_"
+            android:text="."
             android:textColor="#0000FF"
-            android:textSize="75sp"
-
+            android:textSize="85sp"
 
             />
 

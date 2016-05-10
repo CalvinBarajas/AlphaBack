@@ -8,136 +8,102 @@
     android:padding="@dimen/activity_vertical_margin"
     tools:context="org.samanthaai.alphaback.FinalScore">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/winner" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:stretchColumns="1"
+        >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="wrap_content"
+        <TableRow
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Time Duration: "
-            android:textSize="25sp" />
+            android:gravity="center_horizontal|center_vertical">
 
-        <TextView
-            android:id="@+id/time_duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="_"
-            android:textSize="25sp"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/winner"
+                android:paddingBottom="10dp"
+                />
 
-            />
+        </TableRow>
 
-    </LinearLayout>
+        <TableRow>
 
+            <TextView
+                style="@style/FinalScoreLeft"
+                android:text="Time Duration: "
+                />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/time_duration"
+                style="@style/FinalScoreRight"
+                android:text="_"
+                />
 
+        </TableRow>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Number Of Tries: "
-            android:textSize="25sp" />
+        <TableRow>
 
-        <TextView
-            android:id="@+id/right_answers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="26"
-            android:textSize="25sp"
+            <TextView
+                android:text="Number Of Tries: "
+                style="@style/FinalScoreLeft"
+                />
 
-            />
-
-    </LinearLayout>
+            <TextView
+                android:id="@+id/right_answers"
+                android:text="26"
+                style="@style/FinalScoreRight"
+                />
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        </TableRow>
 
+        <TableRow>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Penalty: "
-            android:textSize="25sp" />
+            <TextView
+                android:text="Penalty: "
+                style="@style/FinalScoreLeft" />
 
-        <TextView
-            android:id="@+id/wrong_answers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="_"
-            android:textSize="25sp" />
+            <TextView
+                android:id="@+id/wrong_answers"
+                android:text="_"
+                style="@style/FinalScoreRight"
+                />
 
+        </TableRow>
 
-    </LinearLayout>
+        <TableRow>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:text="Final Score: "
+                style="@style/FinalScoreLeft" />
+                />
 
+            <TextView
+                android:id="@+id/final_score"
+                android:text="_"
+                style="@style/FinalScoreRight"
+                />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Final Score: "
-            android:textSize="25sp" />
+        </TableRow>
 
-        <TextView
-            android:id="@+id/final_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="_"
-            android:textSize="25sp" />
+        <TableRow>
 
-    </LinearLayout>
+            <TextView
+                android:text="Letter Grade: "
+                style="@style/FinalScoreLeft" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/letter_grade"
+                android:text="_"
+                style="@style/FinalScoreRight" />
 
+        </TableRow>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="Letter Grade: "
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/letter_grade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="_"
-            android:textSize="25sp" />
-
-    </LinearLayout>
-
-
-
+    </TableLayout>
 
     <Button
         android:id="@+id/end_game_button"
@@ -149,7 +115,6 @@
         android:padding="5dp"
         android:text="Play Again"
         android:textColor="#000" />
-
 
 </LinearLayout>
 

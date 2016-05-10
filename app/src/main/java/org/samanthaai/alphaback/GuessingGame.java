@@ -2,6 +2,7 @@ package org.samanthaai.alphaback;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,8 @@ public class GuessingGame extends AppCompatActivity {
     private static long elapsedTime; // make this available to the FinalScore class
     private static int penalty; // keep track of mistakes
 
+
+    private final static int MAX_VOLUME = 100;  // volume control
 
 
     @Override
@@ -71,11 +74,20 @@ public class GuessingGame extends AppCompatActivity {
         // find view of alphabet letter
         alphabetLetter = (TextView) findViewById(R.id.alphabet_letter_body);
 
+        // change font style for alphabet letter (left-side of viewport)
+        Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/kids.ttf");
+        alphabetLetter.setTypeface(myCustomFont2);
+
+
         // display random alphabet letter on left-side of the screen
         alphabetLetter.setText(englishAlphabet[randomNum]);
 
         // find view for body text two
         guess = (TextView) findViewById(R.id.guess_body);
+
+        // change font style for guess body (right-side of viewport)
+        Typeface myCustomFont3 = Typeface.createFromAsset(getAssets(), "fonts/kids.ttf");
+        guess.setTypeface(myCustomFont3);
 
         Log.e("currentTimeMillis1 --->", System.currentTimeMillis() + "");
 
@@ -156,9 +168,18 @@ public class GuessingGame extends AppCompatActivity {
 
         if (guessIndex == (randomNum - 1)) {
 
+
+//            AudioManager audioManager = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+//            // For example to set the volume of played media to maximum.
+//            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+
+
             // if guess is right, send an auditory notification as well as a visual one
             MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.right);
+            mp.setVolume(1.0f, 1.0f);
             mp.start();
+            //mp.release();
+
 
             // add successfully guessed letter to array
             alreadyDisplayed.add(randomNum);
@@ -192,9 +213,16 @@ public class GuessingGame extends AppCompatActivity {
 
             penalty += 1;
 
+
+
+
+
+
             // if guess is wrong, send an auditory notification as well as a visual one
             MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.wrong);
+            mp.setVolume(1.0f, 1.0f);
             mp.start();
+            //mp.release();
 
             // toast message when a non-alpha LC is used
             Toast toast = Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT);
@@ -280,15 +308,8 @@ public class GuessingGame extends AppCompatActivity {
         Log.e("elapsedTime 00001 --->", elapsedTime + "");
 
 
-
-
-
-
         Log.e("GAME OVER --->", "COMPLETED...");
 
-        // if guess is right, send an auditory confirmation that game is over
-        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.gameover);
-        mp.start();
 
         Toast toast = Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
