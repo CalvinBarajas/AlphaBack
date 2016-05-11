@@ -11,9 +11,8 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:stretchColumns="1"
-        >
+        android:layout_weight="2"
+        android:stretchColumns="1">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -24,9 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/winner"
                 android:paddingBottom="10dp"
-                />
+                android:src="@drawable/winner" />
 
         </TableRow>
 
@@ -34,87 +32,88 @@
 
             <TextView
                 style="@style/FinalScoreLeft"
-                android:text="Time Duration: "
-                />
+                android:text="Time Duration: " />
 
             <TextView
                 android:id="@+id/time_duration"
                 style="@style/FinalScoreRight"
-                android:text="_"
-                />
+                android:text="_" />
 
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:text="Number Of Tries: "
                 style="@style/FinalScoreLeft"
-                />
+                android:text="Total Tries:" />
 
             <TextView
-                android:id="@+id/right_answers"
-                android:text="26"
+                android:id="@+id/total_tries"
                 style="@style/FinalScoreRight"
-                />
-
+                android:text="_" />
 
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:text="Penalty: "
-                style="@style/FinalScoreLeft" />
+                style="@style/FinalScoreLeft"
+                android:text="Penalty: " />
 
             <TextView
-                android:id="@+id/wrong_answers"
-                android:text="_"
+                android:id="@+id/penalty"
                 style="@style/FinalScoreRight"
-                />
+                android:text="_" />
 
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:text="Final Score: "
-                style="@style/FinalScoreLeft" />
-                />
+                style="@style/FinalScoreLeft"
+                android:text="Total Time: " />
+
 
             <TextView
-                android:id="@+id/final_score"
-                android:text="_"
+                android:id="@+id/total_time"
                 style="@style/FinalScoreRight"
-                />
+                android:text="_" />
 
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:text="Letter Grade: "
-                style="@style/FinalScoreLeft" />
+                style="@style/FinalScoreLeft"
+                android:text="Letter Grade: " />
 
             <TextView
                 android:id="@+id/letter_grade"
-                android:text="_"
-                style="@style/FinalScoreRight" />
+                style="@style/FinalScoreRight"
+                android:text="_" />
 
         </TableRow>
 
     </TableLayout>
 
-    <Button
-        android:id="@+id/end_game_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button"
-        android:padding="5dp"
-        android:text="Play Again"
-        android:textColor="#000" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/end_game_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button"
+            android:padding="5dp"
+            android:text="Play Again"
+            android:textColor="#000" />
+
+    </LinearLayout>
 
 </LinearLayout>
 

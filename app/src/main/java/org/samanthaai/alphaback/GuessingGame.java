@@ -23,16 +23,12 @@ public class GuessingGame extends AppCompatActivity {
     private static int randomNum = 0; // index of random letter generated
     private static TextView guess;  // global TextView to manipulate color
     private static TextView alphabetLetter;  // not sure if this is needed globally
-    private static String[] englishAlphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"}; // this is the entire english alphabet
     private static Set<Integer> alreadyDisplayed; // keep track of letters already displayed to end-user
     private static long startTime; // keep time of game duration
     private static long stopTime; // keep time of game duration
     private static long elapsedTime; // make this available to the FinalScore class
     private static int penalty; // keep track of mistakes
-
-
-    private final static int MAX_VOLUME = 100;  // volume control
-
+    private static String[] englishAlphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}; // this is the entire english alphabet
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +42,6 @@ public class GuessingGame extends AppCompatActivity {
 
         startTime = System.currentTimeMillis();
         Log.e("currentTimeMillis0 --->", System.currentTimeMillis() + "");
-
-
 
 
         // create array that will keep track of random letters already displayed (so no dupes are shown)
@@ -70,12 +64,11 @@ public class GuessingGame extends AppCompatActivity {
         //Log.e("genRandNum 001 --->", randomNum + "");
 
 
-
         // find view of alphabet letter
         alphabetLetter = (TextView) findViewById(R.id.alphabet_letter_body);
 
         // change font style for alphabet letter (left-side of viewport)
-        Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/kids.ttf");
+        Typeface myCustomFont2 = Typeface.createFromAsset(getAssets(), "fonts/acme.ttf");
         alphabetLetter.setTypeface(myCustomFont2);
 
 
@@ -86,7 +79,7 @@ public class GuessingGame extends AppCompatActivity {
         guess = (TextView) findViewById(R.id.guess_body);
 
         // change font style for guess body (right-side of viewport)
-        Typeface myCustomFont3 = Typeface.createFromAsset(getAssets(), "fonts/kids.ttf");
+        Typeface myCustomFont3 = Typeface.createFromAsset(getAssets(), "fonts/acme.ttf");
         guess.setTypeface(myCustomFont3);
 
         Log.e("currentTimeMillis1 --->", System.currentTimeMillis() + "");
@@ -99,10 +92,6 @@ public class GuessingGame extends AppCompatActivity {
         switch (keyCode) {
             case KeyEvent.KEYCODE_A:
                 guessIndex = 0;
-
-                Log.e("currentTimeMillis2 --->", System.currentTimeMillis() + "");
-
-
                 compareLetters(randomNum, guessIndex);
                 guess.setText("a");
                 return true;
@@ -150,6 +139,86 @@ public class GuessingGame extends AppCompatActivity {
                 guessIndex = 9;
                 compareLetters(randomNum, guessIndex);
                 guess.setText("j");
+                return true;
+            case KeyEvent.KEYCODE_K:
+                guessIndex = 10;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("k");
+                return true;
+            case KeyEvent.KEYCODE_L:
+                guessIndex = 11;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("l");
+                return true;
+            case KeyEvent.KEYCODE_M:
+                guessIndex = 12;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("m");
+                return true;
+            case KeyEvent.KEYCODE_N:
+                guessIndex = 13;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("n");
+                return true;
+            case KeyEvent.KEYCODE_O:
+                guessIndex = 14;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("o");
+                return true;
+            case KeyEvent.KEYCODE_P:
+                guessIndex = 15;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("p");
+                return true;
+            case KeyEvent.KEYCODE_Q:
+                guessIndex = 16;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("q");
+                return true;
+            case KeyEvent.KEYCODE_R:
+                guessIndex = 17;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("r");
+                return true;
+            case KeyEvent.KEYCODE_S:
+                guessIndex = 18;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("s");
+                return true;
+            case KeyEvent.KEYCODE_T:
+                guessIndex = 19;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("t");
+                return true;
+            case KeyEvent.KEYCODE_U:
+                guessIndex = 20;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("u");
+                return true;
+            case KeyEvent.KEYCODE_V:
+                guessIndex = 21;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("v");
+                return true;
+            case KeyEvent.KEYCODE_W:
+                guessIndex = 22;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("w");
+                return true;
+            case KeyEvent.KEYCODE_X:
+                guessIndex = 23;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("x");
+                return true;
+            case KeyEvent.KEYCODE_Y:
+                guessIndex = 24;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("y");
+                return true;
+            case KeyEvent.KEYCODE_Z:
+                guessIndex = 25;
+                compareLetters(randomNum, guessIndex);
+                guess.setText("z");
                 return true;
             default:
                 guess.setTextColor(Color.parseColor("#00FF00"));
@@ -202,20 +271,15 @@ public class GuessingGame extends AppCompatActivity {
             TextView progressBarCount = (TextView) findViewById(R.id.progress_bar_count);
 
             // display progress bar in blocks
-            progressBarCount.setText(alreadyDisplayed.size() + "/26");
+            progressBarCount.setText(alreadyDisplayed.size() + "/25");
 
 
             Log.e("currentTimeMillis3 --->", System.currentTimeMillis() + "");
 
 
-
         } else {
 
             penalty += 1;
-
-
-
-
 
 
             // if guess is wrong, send an auditory notification as well as a visual one
@@ -238,25 +302,21 @@ public class GuessingGame extends AppCompatActivity {
     }
 
 
-
-
-
     public int generateRandomNumber() {
 
         Log.e("genRandNum 002 --->", randomNum + "");
 
         int n = 0;
 
-        while(true) {
+        while (true) {
 
             Log.e("currentTimeMillis5 --->", System.currentTimeMillis() + "");
-
 
 
             n++;
             Log.e("value of n --->", n + "");
 
-            if(alreadyDisplayed.size() >= englishAlphabet.length - 1){
+            if (alreadyDisplayed.size() >= englishAlphabet.length - 1) {
 
                 gameOver();
 
@@ -276,16 +336,13 @@ public class GuessingGame extends AppCompatActivity {
             Log.e("ARRAY CONTENTS --->", alreadyDisplayed.toString());
 
 
-
-            if(alreadyDisplayed.contains(randomNum))  {
+            if (alreadyDisplayed.contains(randomNum)) {
                 Log.e("AAA --->", " ---> already in the array");
                 continue;
             } else {
                 Log.e("BBB --->", "unique number, this one can be used");
                 break;
             }
-
-
 
 
         }
@@ -332,8 +389,9 @@ public class GuessingGame extends AppCompatActivity {
         return penalty;
     }
 
-
-
+    public static int getAlphabetArraySize() {
+        return englishAlphabet.length;
+    }
 
 
 }
