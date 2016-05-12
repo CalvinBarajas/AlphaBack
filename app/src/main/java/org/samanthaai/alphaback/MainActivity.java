@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // find the view
-        Button startGame = (Button) findViewById(R.id.button1);
+        Button startGame = (Button) findViewById(R.id.guessing_game_btn);
 
         // assign listener to button
         startGame.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +47,24 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.hello_world);
         Typeface myCustomFont1 = Typeface.createFromAsset(getAssets(), "fonts/school.ttf");
         textView.setTypeface(myCustomFont1);
+
+
+
+        // find the view for the FLASH CARDS BUTTON
+        Button flashCardsBtn = (Button) findViewById(R.id.flash_cards_btn);
+
+        // assign listener to FLASH CARDS BUTTON and launch activity
+        flashCardsBtn.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                Intent intent = new Intent(MainActivity.this, FlashCards.class);
+                startActivity(intent);
+            }
+
+
+        });
+
 
 
 

@@ -28,7 +28,7 @@
             />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/guessing_game_btn"
             android:layout_width="250dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
@@ -37,7 +37,7 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/flash_cards_btn"
             android:layout_width="250dp"
             android:layout_height="70dp"
             android:layout_gravity="center"

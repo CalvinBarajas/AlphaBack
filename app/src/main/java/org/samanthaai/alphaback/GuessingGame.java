@@ -1,10 +1,12 @@
 package org.samanthaai.alphaback;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -293,6 +295,18 @@ public class GuessingGame extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
             guess.setTextColor(Color.parseColor("#FF0000"));
+
+
+            // Get instance of Vibrator from current Context
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
+            // Vibrate in milliseconds
+            v.vibrate(100);
+
+
+
+
+
 
 
             Log.e("currentTimeMillis4 --->", System.currentTimeMillis() + "");
