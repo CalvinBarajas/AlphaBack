@@ -3,6 +3,7 @@ package org.samanthaai.alphaback;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 import java.math.BigDecimal;
 
 public class FinalScore extends AppCompatActivity {
+
+    private static MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +25,10 @@ public class FinalScore extends AppCompatActivity {
         int alphabetArraySize = GuessingGame.getAlphabetArraySize();
 
 
-        // if guess is right, send an auditory confirmation that game is over
-        MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.gameover);
-        mp.setVolume(1.0f, 1.0f);
-        mp.start();
-        //mp.release();
+//        // if guess is right, send an auditory confirmation that game is over
+//        mp = MediaPlayer.create(getApplicationContext(), R.raw.gameover);
+//        mp.setVolume(1.0f, 1.0f);
+//        mp.start();
 
         // find the view (used for ending the game)
         Button endGame = (Button) findViewById(R.id.end_game_button);
@@ -101,6 +103,15 @@ public class FinalScore extends AppCompatActivity {
         }
 
     } // closes calculateLetterGrade
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("onPause() -->", "The onPause() Event FinalScore.java");
+        finish();
+    }
+
+
 
 
 } // closes the class

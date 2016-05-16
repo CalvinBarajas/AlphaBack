@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
@@ -29,21 +33,99 @@ public class GuessingGame extends AppCompatActivity {
     private static long startTime; // keep time of game duration
     private static long stopTime; // keep time of game duration
     private static long elapsedTime; // make this available to the FinalScore class
-    private static int penalty; // keep track of mistakes
+    private static int penalty = 0; // keep track of mistakes
     private static String[] englishAlphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}; // this is the entire english alphabet
+    private static MediaPlayer mp;  // use release()
+
+
+    SoundPool mySoundPool;  // create and configure a SoundPool instance
+    int soundRight;  // answer is correct
+    int soundWrong;  // answer is incorrect
+    int soundGameOver;  // the game is over 26 guesses have been reached
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_one);
 
+        ///////////////////////////////////////////////////////////////////////
+        ///////////////////// Begin - SoundPool Example ///////////////////////
+        ///////////////////////////////////////////////////////////////////////
+
+        // check the API version in order to use the correct code
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            //code greater or equal to API 21 (lollipop)
+            Log.e("VER.SDK_INT --->", Build.VERSION.SDK_INT + "" );
+            Log.e("VER_CODES.LOLLIPOP --->", Build.VERSION_CODES.LOLLIPOP + "" );
+
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .build();
+
+            mySoundPool = new SoundPool.Builder()
+                    .setMaxStreams(2)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+
+            soundRight = mySoundPool.load(this, R.raw.right, 1);
+            soundWrong = mySoundPool.load(this, R.raw.wrong, 1);
+            soundGameOver = mySoundPool.load(this, R.raw.gameover, 1);
+
+        } else {
+            Log.e("Does This Execute --->", "NoNoNoNoNoNo" );
+            //code for all other versions
+            // for older API versions (i.e., API less than 21)
+            mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 1);
+            soundRight = mySoundPool.load(this, R.raw.right, 1);
+            soundWrong = mySoundPool.load(this, R.raw.wrong, 1);
+            soundGameOver = mySoundPool.load(this, R.raw.gameover, 1);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////
+        ///////////////////// End - SoundPool Example ///////////////////////
+        ///////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
         // initialize penalty to zero
-        penalty = 0;
+        // penalty = 0;
 
         Log.e("001 penalty --->", penalty + "");
 
         startTime = System.currentTimeMillis();
-        Log.e("currentTimeMillis0 --->", System.currentTimeMillis() + "");
+        Log.d("currentTimeMillis0 --->", System.currentTimeMillis() + "");
 
 
         // create array that will keep track of random letters already displayed (so no dupes are shown)
@@ -84,12 +166,14 @@ public class GuessingGame extends AppCompatActivity {
         Typeface myCustomFont3 = Typeface.createFromAsset(getAssets(), "fonts/acme.ttf");
         guess.setTypeface(myCustomFont3);
 
-        Log.e("currentTimeMillis1 --->", System.currentTimeMillis() + "");
+        Log.d("currentTimeMillis1 --->", System.currentTimeMillis() + "");
 
     }
 
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
+
+        // mp.release();
 
         switch (keyCode) {
             case KeyEvent.KEYCODE_A:
@@ -222,6 +306,13 @@ public class GuessingGame extends AppCompatActivity {
                 compareLetters(randomNum, guessIndex);
                 guess.setText("z");
                 return true;
+            // In case someone clicks the back button
+            case KeyEvent.KEYCODE_BACK:
+                Toast toast1 = Toast.makeText(getApplicationContext(), "Exiting Game", Toast.LENGTH_SHORT);
+                toast1.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast1.show();
+                onPause();
+                return true;
             default:
                 guess.setTextColor(Color.parseColor("#00FF00"));
                 guess.setText("?");
@@ -245,11 +336,17 @@ public class GuessingGame extends AppCompatActivity {
 //            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
 
 
-            // if guess is right, send an auditory notification as well as a visual one
-            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.right);
-            mp.setVolume(1.0f, 1.0f);
-            mp.start();
-            //mp.release();
+
+            mySoundPool.play (soundRight, 0.9f, 0.9f, 1, 0, 1);
+
+
+
+
+
+//            // if guess is right, send an auditory notification as well as a visual one
+//            mp = MediaPlayer.create(getApplicationContext(), R.raw.right);
+//            mp.setVolume(1.0f, 1.0f);
+//            mp.start();
 
 
             // add successfully guessed letter to array
@@ -276,7 +373,7 @@ public class GuessingGame extends AppCompatActivity {
             progressBarCount.setText(alreadyDisplayed.size() + "/25");
 
 
-            Log.e("currentTimeMillis3 --->", System.currentTimeMillis() + "");
+            Log.d("currentTimeMillis3 --->", System.currentTimeMillis() + "");
 
 
         } else {
@@ -284,11 +381,17 @@ public class GuessingGame extends AppCompatActivity {
             penalty += 1;
 
 
-            // if guess is wrong, send an auditory notification as well as a visual one
-            MediaPlayer mp = MediaPlayer.create(getApplicationContext(), R.raw.wrong);
-            mp.setVolume(1.0f, 1.0f);
-            mp.start();
-            //mp.release();
+
+            mySoundPool.play (soundWrong, 0.9f, 0.9f, 1, 0, 1);
+
+
+
+
+
+//            // if guess is wrong, send an auditory notification as well as a visual one
+//            mp = MediaPlayer.create(getApplicationContext(), R.raw.wrong);
+//            mp.setVolume(1.0f, 1.0f);
+//            mp.start();
 
             // toast message when a non-alpha LC is used
             Toast toast = Toast.makeText(getApplicationContext(), "Try Again", Toast.LENGTH_SHORT);
@@ -309,7 +412,7 @@ public class GuessingGame extends AppCompatActivity {
 
 
 
-            Log.e("currentTimeMillis4 --->", System.currentTimeMillis() + "");
+            Log.d("currentTimeMillis4 --->", System.currentTimeMillis() + "");
 
         }
 
@@ -318,21 +421,23 @@ public class GuessingGame extends AppCompatActivity {
 
     public int generateRandomNumber() {
 
-        Log.e("genRandNum 002 --->", randomNum + "");
+        Log.d("genRandNum 002 --->", randomNum + "");
 
         int n = 0;
 
         while (true) {
 
-            Log.e("currentTimeMillis5 --->", System.currentTimeMillis() + "");
+            Log.d("currentTimeMillis5 --->", System.currentTimeMillis() + "");
 
 
             n++;
-            Log.e("value of n --->", n + "");
+            Log.d("value of n --->", n + "");
 
             if (alreadyDisplayed.size() >= englishAlphabet.length - 1) {
 
                 gameOver();
+
+
 
                 break;
             }
@@ -343,25 +448,25 @@ public class GuessingGame extends AppCompatActivity {
             int maximum = englishAlphabet.length - 1;  // inclusive
             randomNum = minimum + (int) (Math.random() * maximum);
 
-            Log.e("genRandNum 004 --->", randomNum + "");
-            Log.e("while evaluates to -->", alreadyDisplayed.contains(randomNum) + "");
+            Log.d("genRandNum 004 --->", randomNum + "");
+            Log.d("while evaluates to -->", alreadyDisplayed.contains(randomNum) + "");
 
             // print test copy of array
-            Log.e("ARRAY CONTENTS --->", alreadyDisplayed.toString());
+            Log.d("ARRAY CONTENTS --->", alreadyDisplayed.toString());
 
 
             if (alreadyDisplayed.contains(randomNum)) {
-                Log.e("AAA --->", " ---> already in the array");
+                Log.d("AAA --->", " ---> already in the array");
                 continue;
             } else {
-                Log.e("BBB --->", "unique number, this one can be used");
+                Log.d("BBB --->", "unique number, this one can be used");
                 break;
             }
 
 
         }
 
-        Log.e("genRandNum 006 --->", randomNum + "");
+        Log.d("genRandNum 006 --->", randomNum + "");
         return randomNum;
 
 
@@ -370,16 +475,16 @@ public class GuessingGame extends AppCompatActivity {
 
     public void gameOver() {
 
-        Log.e("currentTimeMillis6 --->", System.currentTimeMillis() + "");
+        Log.d("currentTimeMillis6 --->", System.currentTimeMillis() + "");
 
 
         // keep track of how long game took to complete
         stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
-        Log.e("elapsedTime 00001 --->", elapsedTime + "");
+        Log.d("elapsedTime 00001 --->", elapsedTime + "");
 
 
-        Log.e("GAME OVER --->", "COMPLETED...");
+        Log.d("GAME OVER --->", "COMPLETED...");
 
 
         Toast toast = Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT);
@@ -405,6 +510,14 @@ public class GuessingGame extends AppCompatActivity {
 
     public static int getAlphabetArraySize() {
         return englishAlphabet.length;
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("onPause() -->", "The onPause() Event GuessingGame.java");
+        finish();
     }
 
 

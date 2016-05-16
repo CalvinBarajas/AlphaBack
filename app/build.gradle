@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "org.samanthaai.alphaback"
-        minSdkVersion 15
+        minSdkVersion 15  // Calvin change this from 15 to 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
