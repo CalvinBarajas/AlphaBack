@@ -39,9 +39,9 @@ public class GuessingGame extends AppCompatActivity {
 
 
     SoundPool mySoundPool;  // create and configure a SoundPool instance
-    int soundRight;  // answer is correct
-    int soundWrong;  // answer is incorrect
-    int soundGameOver;  // the game is over 26 guesses have been reached
+    private static int soundRight;  // answer is correct
+    private static int soundWrong;  // answer is incorrect
+    private static int soundGameOver;  // the game is over 26 guesses have been reached
 
 
 
@@ -50,74 +50,8 @@ public class GuessingGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_one);
 
-        ///////////////////////////////////////////////////////////////////////
-        ///////////////////// Begin - SoundPool Example ///////////////////////
-        ///////////////////////////////////////////////////////////////////////
-
-        // check the API version in order to use the correct code
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-            //code greater or equal to API 21 (lollipop)
-            Log.e("VER.SDK_INT --->", Build.VERSION.SDK_INT + "" );
-            Log.e("VER_CODES.LOLLIPOP --->", Build.VERSION_CODES.LOLLIPOP + "" );
-
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .setUsage(AudioAttributes.USAGE_GAME)
-                    .build();
-
-            mySoundPool = new SoundPool.Builder()
-                    .setMaxStreams(2)
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-
-            soundRight = mySoundPool.load(this, R.raw.right, 1);
-            soundWrong = mySoundPool.load(this, R.raw.wrong, 1);
-            soundGameOver = mySoundPool.load(this, R.raw.gameover, 1);
-
-        } else {
-            Log.e("Does This Execute --->", "NoNoNoNoNoNo" );
-            //code for all other versions
-            // for older API versions (i.e., API less than 21)
-            mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 1);
-            soundRight = mySoundPool.load(this, R.raw.right, 1);
-            soundWrong = mySoundPool.load(this, R.raw.wrong, 1);
-            soundGameOver = mySoundPool.load(this, R.raw.gameover, 1);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        ///////////////////////////////////////////////////////////////////////
-        ///////////////////// End - SoundPool Example ///////////////////////
-        ///////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
+        // to create sound for game
+        initializeSoundPool();
 
         // initialize penalty to zero
         // penalty = 0;
@@ -337,7 +271,7 @@ public class GuessingGame extends AppCompatActivity {
 
 
 
-            mySoundPool.play (soundRight, 0.9f, 0.9f, 1, 0, 1);
+            mySoundPool.play (soundRight, 1.0f, 1.0f, 1, 0, 1);
 
 
 
@@ -382,7 +316,7 @@ public class GuessingGame extends AppCompatActivity {
 
 
 
-            mySoundPool.play (soundWrong, 0.9f, 0.9f, 1, 0, 1);
+            mySoundPool.play (soundWrong, 1.0f, 1.0f, 1, 0, 1);
 
 
 
@@ -477,7 +411,6 @@ public class GuessingGame extends AppCompatActivity {
 
         Log.d("currentTimeMillis6 --->", System.currentTimeMillis() + "");
 
-
         // keep track of how long game took to complete
         stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
@@ -486,11 +419,7 @@ public class GuessingGame extends AppCompatActivity {
 
         Log.d("GAME OVER --->", "COMPLETED...");
 
-
-        Toast toast = Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.show();
-
+        mySoundPool.play(soundGameOver, 1.0f, 1.0f, 1, 0, 1);
 
         Intent intent = new Intent(this, FinalScore.class);
         startActivity(intent);
@@ -504,10 +433,12 @@ public class GuessingGame extends AppCompatActivity {
         return elapsedTime;
     }
 
+    // Getter (from setters and getters concept)
     public static int getPenalty() {
         return penalty;
     }
 
+    // Getter (from setters and getters concept)
     public static int getAlphabetArraySize() {
         return englishAlphabet.length;
     }
@@ -519,6 +450,58 @@ public class GuessingGame extends AppCompatActivity {
         Log.e("onPause() -->", "The onPause() Event GuessingGame.java");
         finish();
     }
+
+
+    private void initializeSoundPool() {
+
+        ///////////////////////////////////////////////////////////////////////
+        ///////////////////// Begin - SoundPool Example ///////////////////////
+        ///////////////////////////////////////////////////////////////////////
+
+        // check the API version in order to use the correct code
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            //code greater or equal to API 21 (lollipop)
+            Log.e("VER.SDK_INT --->", Build.VERSION.SDK_INT + "" );
+            Log.e("VER_CODES.LOLLIPOP --->", Build.VERSION_CODES.LOLLIPOP + "" );
+
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .build();
+
+            mySoundPool = new SoundPool.Builder()
+                    .setMaxStreams(3)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+
+            soundRight = mySoundPool.load(this, R.raw.right, 1);
+            soundWrong = mySoundPool.load(this, R.raw.wrong, 1);
+            soundGameOver = mySoundPool.load(this, R.raw.gameover, 1);
+
+        } else {
+            Log.e("Does This Execute --->", "NoNoNoNoNoNo" );
+            //code for all other versions
+            // for older API versions (i.e., API less than 21)
+            mySoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 1);
+            soundRight = mySoundPool.load(this, R.raw.right, 1);
+            soundWrong = mySoundPool.load(this, R.raw.wrong, 1);
+            soundGameOver = mySoundPool.load(this, R.raw.gameover, 1);
+        }
+
+
+
+        ///////////////////////////////////////////////////////////////////////
+        ///////////////////// End - SoundPool Example ///////////////////////
+        ///////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    }
+
+
 
 
 }
