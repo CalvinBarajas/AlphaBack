@@ -16,39 +16,79 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GuessingGame extends AppCompatActivity {
 
-    private static int guessIndex;  // displayed on right side of screen - users guess
-    private static int randomNum = 0; // index of random letter generated
+    // Fix problem with TIME DURATION
+
+
+
+    private static int guessIndex;  // corresponds to the guess made by player
+    private static int randomNum = 0; // corresponds to index of random letter generated
     private static TextView guess;  // global TextView to manipulate color
     private static TextView alphabetLetter;  // not sure if this is needed globally
     private static Set<Integer> alreadyDisplayed; // keep track of letters already displayed to end-user
-    private static long startTime; // keep time of game duration
-    private static long stopTime; // keep time of game duration
+    // private static long startTime; // keep time of game duration
+    // private static long stopTime; // keep time of game duration
     private static long elapsedTime; // make this available to the FinalScore class
     private static int penalty = 0; // keep track of mistakes
     private static String[] englishAlphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"}; // this is the entire english alphabet
     private static MediaPlayer mp;  // use release()
-
-
-    SoundPool mySoundPool;  // create and configure a SoundPool instance
-    private static int soundRight;  // answer is correct
-    private static int soundWrong;  // answer is incorrect
+    private static SoundPool mySoundPool;  // create and configure a SoundPool instance
+    private static int soundRight;  // if guess is correct
+    private static int soundWrong;  // if guess is incorrect
     private static int soundGameOver;  // the game is over 26 guesses have been reached
+    final Animation fadeOut = new AlphaAnimation(1.0f, 0.0f); // animate GUESS LETTER (fade to invisible)
 
-
+    public static int seconds = 0; // used for displaying and calculating game duration
+    public static int minutes = 0; // used for displaying and calculating game duration
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_one);
+
+        ///////////////////////////////////////////////////////////////////////////
+        ////////// KEEP TRACK OF GAME DURATION WHILE DISPLAYING CLOCK ////////////
+        //////////////////////////////////////////////////////////////////////////
+
+
+        //Declare the timer
+        Timer timer = new Timer();
+        //Set the schedule function and rate
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView textView = (TextView) findViewById(R.id.chronometer);
+                        textView.setText(String.valueOf(minutes) + ":" + String.valueOf(seconds));
+                        if (seconds == 60) {
+                            textView.setText(String.valueOf(minutes) + ":" + String.valueOf(seconds));
+                            seconds = 0;
+                            minutes = minutes + 1;
+                        }
+                        seconds += 1;
+                    }
+                });
+            }
+        }, 0, 1000);
+
+        //////////////////////////////////////////////////////////////////////////
+
+
+        // animate GUESS LETTER (fade to invisible)
+        fadeOut.setDuration(2000);
 
         // to create sound for game
         initializeSoundPool();
@@ -58,22 +98,12 @@ public class GuessingGame extends AppCompatActivity {
 
         Log.e("001 penalty --->", penalty + "");
 
-        startTime = System.currentTimeMillis();
+        //startTime = System.currentTimeMillis();
         Log.d("currentTimeMillis0 --->", System.currentTimeMillis() + "");
 
 
         // create array that will keep track of random letters already displayed (so no dupes are shown)
         alreadyDisplayed = new HashSet<Integer>();
-
-        // find the view (used for ending the game)
-        Button endGame = (Button) findViewById(R.id.end_game_button);
-
-        // assign listener to button (used for ending the game)
-        endGame.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         //Log.e("genRandNum 000 --->", randomNum + "");
 
@@ -113,131 +143,209 @@ public class GuessingGame extends AppCompatActivity {
             case KeyEvent.KEYCODE_A:
                 guessIndex = 0;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("a");
                 return true;
             case KeyEvent.KEYCODE_B:
                 guessIndex = 1;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("b");
                 return true;
             case KeyEvent.KEYCODE_C:
                 guessIndex = 2;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("c");
                 return true;
             case KeyEvent.KEYCODE_D:
                 guessIndex = 3;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("d");
                 return true;
             case KeyEvent.KEYCODE_E:
                 guessIndex = 4;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("e");
                 return true;
             case KeyEvent.KEYCODE_F:
                 guessIndex = 5;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("f");
                 return true;
             case KeyEvent.KEYCODE_G:
                 guessIndex = 6;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("g");
                 return true;
             case KeyEvent.KEYCODE_H:
                 guessIndex = 7;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("h");
                 return true;
             case KeyEvent.KEYCODE_I:
                 guessIndex = 8;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("i");
                 return true;
             case KeyEvent.KEYCODE_J:
                 guessIndex = 9;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("j");
                 return true;
             case KeyEvent.KEYCODE_K:
                 guessIndex = 10;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("k");
                 return true;
             case KeyEvent.KEYCODE_L:
                 guessIndex = 11;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("l");
                 return true;
             case KeyEvent.KEYCODE_M:
                 guessIndex = 12;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("m");
                 return true;
             case KeyEvent.KEYCODE_N:
                 guessIndex = 13;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("n");
                 return true;
             case KeyEvent.KEYCODE_O:
                 guessIndex = 14;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("o");
                 return true;
             case KeyEvent.KEYCODE_P:
                 guessIndex = 15;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("p");
                 return true;
             case KeyEvent.KEYCODE_Q:
                 guessIndex = 16;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("q");
                 return true;
             case KeyEvent.KEYCODE_R:
                 guessIndex = 17;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("r");
                 return true;
             case KeyEvent.KEYCODE_S:
                 guessIndex = 18;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("s");
                 return true;
             case KeyEvent.KEYCODE_T:
                 guessIndex = 19;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("t");
                 return true;
             case KeyEvent.KEYCODE_U:
                 guessIndex = 20;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("u");
                 return true;
             case KeyEvent.KEYCODE_V:
                 guessIndex = 21;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("v");
                 return true;
             case KeyEvent.KEYCODE_W:
                 guessIndex = 22;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("w");
                 return true;
             case KeyEvent.KEYCODE_X:
                 guessIndex = 23;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("x");
                 return true;
             case KeyEvent.KEYCODE_Y:
                 guessIndex = 24;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("y");
                 return true;
             case KeyEvent.KEYCODE_Z:
                 guessIndex = 25;
                 compareLetters(randomNum, guessIndex);
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("z");
                 return true;
             // In case someone clicks the back button
@@ -249,6 +357,9 @@ public class GuessingGame extends AppCompatActivity {
                 return true;
             default:
                 guess.setTextColor(Color.parseColor("#00FF00"));
+                // animate GUESS LETTER (fade to invisible)
+                guess.startAnimation(fadeOut);
+                guess.setVisibility(View.INVISIBLE);
                 guess.setText("?");
                 // display toast in case user types in something other than a letter
                 Toast toast = Toast.makeText(getApplicationContext(), "Lower-Case Letters Only", Toast.LENGTH_SHORT);
@@ -286,7 +397,7 @@ public class GuessingGame extends AppCompatActivity {
             // add successfully guessed letter to array
             alreadyDisplayed.add(randomNum);
 
-            guess.setTextColor(Color.parseColor("#0000FF"));
+            guess.setTextColor(Color.parseColor("#018A7B"));
 
             // generate a random number to display random alphabet letter that user will guess against
             randomNum = generateRandomNumber();
@@ -412,8 +523,8 @@ public class GuessingGame extends AppCompatActivity {
         Log.d("currentTimeMillis6 --->", System.currentTimeMillis() + "");
 
         // keep track of how long game took to complete
-        stopTime = System.currentTimeMillis();
-        elapsedTime = stopTime - startTime;
+        //stopTime = System.currentTimeMillis();
+        elapsedTime = (seconds + (minutes * 60));
         Log.d("elapsedTime 00001 --->", elapsedTime + "");
 
 
@@ -448,6 +559,7 @@ public class GuessingGame extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.e("onPause() -->", "The onPause() Event GuessingGame.java");
+
         finish();
     }
 

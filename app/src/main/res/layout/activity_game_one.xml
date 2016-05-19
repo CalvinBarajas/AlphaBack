@@ -8,16 +8,15 @@
     android:padding="20dp"
     tools:context=".GuessingGame">
 
-    <Button
-        android:id="@+id/end_game_button"
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/button"
-        android:padding="5dp"
-        android:text="Exit"
-        android:textColor="#000" />
+        android:gravity="center_horizontal"
+        android:text="Guess The Previous Alphabetical Letter"
+        android:textSize="15sp"
+
+        />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -25,30 +24,9 @@
         android:background="@drawable/rounded_bg" >
 
         <TextView
-            android:id="@+id/alphabet_letter_header"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="The Letter"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/alphabet_letter_body"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/alphabet_letter_header"
-            android:gravity="center_horizontal"
-            android:text="."
-            android:textColor="#0000FF"
-            android:textSize="100sp"
-            android:paddingBottom="15dp"
-            />
-
-        <TextView
             android:id="@+id/guess_header"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:gravity="center_horizontal"
             android:text="Your Guess"
             android:textSize="20sp"
@@ -58,47 +36,93 @@
             android:id="@+id/guess_body"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:gravity="center_horizontal"
+            android:text=""
+            android:textColor="#0000FF"
+            android:textSize="100sp"
+            android:paddingBottom="15dp"
             android:layout_below="@id/guess_header"
+
+            />
+
+        <TextView
+            android:id="@+id/alphabet_letter_header"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="The Letter"
+            android:textSize="20sp"
+            android:layout_alignParentRight="true"
+            />
+
+        <TextView
+            android:id="@+id/alphabet_letter_body"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="."
             android:textColor="#0000FF"
             android:textSize="100sp"
             android:paddingBottom="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/alphabet_letter_header"
             />
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Progress:"
-        />
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
 
         <TextView
-            android:id="@+id/progress_bar"
-            android:layout_width="270dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: "
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFF"
-            android:text=""
-            android:textSize="10dp"
+
+            android:text="00:00"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Progress: "
+            android:textSize="20sp"
             />
 
         <TextView
             android:id="@+id/progress_bar_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:background="#FFF"
             android:text="0/25"
+            android:textSize="20sp"
             />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#FFF"
+        android:text=""
+        android:textSize="12dp"
+        />
+
 
 </LinearLayout>

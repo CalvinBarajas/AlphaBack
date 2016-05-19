@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <!-- This section is for the FINAL SCORE page (left-hand side of table in body)-->
     <style name="FinalScoreLeft">
         <item name="android:layout_marginTop">2dp</item>
