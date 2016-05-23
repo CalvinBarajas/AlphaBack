@@ -1,5 +1,6 @@
 package org.samanthaai.alphaback;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -121,12 +122,26 @@ public class FlashCards extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onPause() {
         super.onPause();
-        Log.e("onPause() -->", "The onPause() Event FlashCards.java");
+        Log.e("onPause() -->", "The onPause() Event GuessingGame.java");
+
+        Intent intent = new Intent(FlashCards.this, MainActivity.class);
+        startActivity(intent);
+
+
         finish();
+        Log.e("B5-001 FINISH()---> ", "DID FINISH() EXECUTE?");
+
+
     }
+
+
+
+
+
 
 
 

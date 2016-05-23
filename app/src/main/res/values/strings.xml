@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Alphabet Backwards Game</string>
+    <string name="app_name">AlphaBak Game</string>
     <string name="guessing_game">Guess The Previous Alphabetical Letter</string>
     <string name="flash_cards">Flash Cards Game</string>
-
 </resources>

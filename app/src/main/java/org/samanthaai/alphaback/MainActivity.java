@@ -84,3 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+
+
+// replace all hard-coded text with variables

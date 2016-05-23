@@ -124,5 +124,13 @@
         android:textSize="12dp"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Click Back Button To Restart"
+        android:gravity="bottom"
+        android:textColor="#33000000"
+
+        />
 
 </LinearLayout>
