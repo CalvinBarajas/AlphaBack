@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#2196F0"
@@ -15,17 +14,16 @@
 
         <ImageView
             android:id="@+id/flash_cards"
-            android:src="@drawable/flash_card_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:src="@drawable/flash_card_bg" />
 
         <TextView
             android:id="@+id/large_letter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="."
             android:layout_marginTop="45dp"
+            android:text="."
             android:textAlignment="center"
             android:textSize="150sp" />
 
@@ -58,9 +56,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Guess The Next Card Before Clicking The Button"
-        android:textStyle="bold|italic"
+        android:text="@string/fc_playing_instructions"
         android:textAlignment="center"
-        />
+        android:textStyle="bold|italic" />
 
 </LinearLayout>

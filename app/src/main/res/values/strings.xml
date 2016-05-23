@@ -2,4 +2,7 @@
     <string name="app_name">AlphaBak Game</string>
     <string name="guessing_game">Guess The Previous Alphabetical Letter</string>
     <string name="flash_cards">Flash Cards Game</string>
+    <string name="fc_playing_instructions">Guess The Next Card Before Clicking The Button</string>
+    <string name="gg_playing_instructions">Guess The Previous Alphabetical Letter</string>
+    <string name="home_page_header">Learn The Alphabet Backwards Game</string>
 </resources>

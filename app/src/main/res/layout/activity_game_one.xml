@@ -6,22 +6,20 @@
     android:background="#FF9800"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".GuessingGame">
+    tools:context="org.samanthaai.alphaback.GuessingGame">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:gravity="center_horizontal"
-        android:text="Guess The Previous Alphabetical Letter"
-        android:textSize="15sp"
-
-        />
+        android:text="@string/gg_playing_instructions"
+        android:textSize="15sp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_bg" >
+        android:background="@drawable/rounded_bg">
 
         <TextView
             android:id="@+id/guess_header"
@@ -29,44 +27,39 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Your Guess"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/guess_body"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_below="@id/guess_header"
             android:gravity="center_horizontal"
+            android:paddingBottom="15dp"
             android:text=""
             android:textColor="#0000FF"
-            android:textSize="100sp"
-            android:paddingBottom="15dp"
-            android:layout_below="@id/guess_header"
-
-            />
+            android:textSize="100sp" />
 
         <TextView
             android:id="@+id/alphabet_letter_header"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:gravity="center_horizontal"
             android:text="The Letter"
-            android:textSize="20sp"
-            android:layout_alignParentRight="true"
-            />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/alphabet_letter_body"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="."
-            android:textColor="#0000FF"
-            android:textSize="100sp"
-            android:paddingBottom="15dp"
             android:layout_alignParentRight="true"
             android:layout_below="@id/alphabet_letter_header"
-            />
+            android:gravity="center_horizontal"
+            android:paddingBottom="15dp"
+            android:text="."
+            android:textColor="#0000FF"
+            android:textSize="100sp" />
 
     </RelativeLayout>
 
@@ -74,34 +67,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal"
         android:gravity="center"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time: "
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/chronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFF"
-
             android:text="00:00"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="Progress: "
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/progress_bar_count"
@@ -109,8 +97,7 @@
             android:layout_height="wrap_content"
             android:background="#FFF"
             android:text="0/25"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -121,16 +108,13 @@
         android:layout_marginTop="5dp"
         android:background="#FFF"
         android:text=""
-        android:textSize="12dp"
-        />
+        android:textSize="12dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Click Back Button To Restart"
         android:gravity="bottom"
-        android:textColor="#33000000"
-
-        />
+        android:text="Click Back Button To Restart"
+        android:textColor="#33000000" />
 
 </LinearLayout>

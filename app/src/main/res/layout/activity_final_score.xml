@@ -29,7 +29,6 @@
         </TableRow>
 
         <TableRow>
-
             <TextView
                 style="@style/FinalScoreLeft"
                 android:text="Time Duration: " />
@@ -42,7 +41,6 @@
         </TableRow>
 
         <TableRow>
-
             <TextView
                 style="@style/FinalScoreLeft"
                 android:text="Total Tries:" />
@@ -55,7 +53,6 @@
         </TableRow>
 
         <TableRow>
-
             <TextView
                 style="@style/FinalScoreLeft"
                 android:text="Penalty: " />
@@ -68,11 +65,9 @@
         </TableRow>
 
         <TableRow>
-
             <TextView
                 style="@style/FinalScoreLeft"
                 android:text="Total Time: " />
-
 
             <TextView
                 android:id="@+id/total_time"
@@ -82,7 +77,6 @@
         </TableRow>
 
         <TableRow>
-
             <TextView
                 style="@style/FinalScoreLeft"
                 android:text="Letter Grade: " />
@@ -116,6 +110,3 @@
     </LinearLayout>
 
 </LinearLayout>
-
-
-    <!-- replace all hard-coded text -->
